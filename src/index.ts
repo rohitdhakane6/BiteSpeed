@@ -1,15 +1,11 @@
-import { PrismaClient } from "@prisma/client";
+import express from "express";
 
-const prisma = new PrismaClient();
+const app = express();
+const port = 3000;
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
-async function main() {
-  const users = await prisma.user.create({
-    data: {
-      name: "Alice",
-      email: "alice@gmail.com",
-    },
-  });
-  console.log("Created user:", users);
-}
-
-main();
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
