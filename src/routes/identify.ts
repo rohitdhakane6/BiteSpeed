@@ -131,7 +131,7 @@ identifyRouter.post("/", async (req, res) => {
         }
       }
 
-      // 7. Build final response (no additional DB query needed)
+      // 7. Build final response 
       const allFinalContacts = allContacts.filter(
         (c) => c.id === primaryContact.id || c.linkedId === primaryContact.id
       );
