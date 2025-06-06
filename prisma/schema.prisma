@@ -7,18 +7,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  posts   Post[]
+model Contact {
+  id             String          @id @default(cuid())
+  phoneNumber    String?         @map("phone_number")
+  email          String?
+  linkedId       Int?            @map("linked_id")
+  linkPrecedence LinkPrecedence? @map("link_precedence")
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @default(now()) @updatedAt @map("updated_at")
+  deletedAt      DateTime?       @map("deleted_at")
+
+  @@map("contacts")
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  Int?
+enum LinkPrecedence {
+  primary
+  secondary
 }
+
+// {
+// id                   Int                   
+// phoneNumber          String?
+// email                String?
+// linkedId             Int? // the ID of another Contact linked to this one
+// linkPrecedence       "secondary"|"primary" // "primary" if it's the first Contact in the link
+// createdAt            DateTime              
+// updatedAt            DateTime              
+// deletedAt            DateTime?
+// }
