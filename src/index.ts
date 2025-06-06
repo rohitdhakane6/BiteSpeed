@@ -5,13 +5,15 @@ import path from "path";
 
 const app = express();
 app.use(express.json());
-dotenv.config;
+dotenv.config();
 app.use(express.static(path.join(__dirname, "public")));
 
-const port = process.env.PORT || 3000 
+const port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.json({
+    message: "Welcome to the Identify API",
+  });
 });
 
 app.use("/identify", identifyRouter);
