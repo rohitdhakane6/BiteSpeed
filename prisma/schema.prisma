@@ -8,10 +8,10 @@ datasource db {
 }
 
 model Contact {
-  id             String          @id @default(cuid())
-  phoneNumber    String?         @map("phone_number")
+  id             Int             @id @default(autoincrement())
+  phoneNumber    String?            @map("phone_number")
   email          String?
-  linkedId       String?         @map("linked_id")
+  linkedId       Int?            @map("linked_id")
   linkPrecedence LinkPrecedence? @map("link_precedence")
   createdAt      DateTime        @default(now()) @map("created_at")
   updatedAt      DateTime        @default(now()) @updatedAt @map("updated_at")
